@@ -25,11 +25,14 @@ jobs:
     # Make directory to upload the test results
       - name: Make Directory for results
         run: mkdir -p testResults
-        
+              
    # Run the POSTMAN collection
       - name: Run API Tests
-        run: newman run "Restful Booker BVT.postman_collection.json" -e "Production.postman_environment.json" -r htmlextra --reporter-htmlextra-export ./testResults/htmlreport.html
-
+        run: |
+           pwd
+           newman run "Restful Booker BVT.postman_collection.json" -e "Production.postman_environment.json" -r htmlextra --reporter-htmlextra-export /htmlreport.html
+        working-directory: testResults
+        
     # Upload the contents of Test Results directory to workspace
       - name: Output the run Details
         uses: actions/upload-artifact@v2
